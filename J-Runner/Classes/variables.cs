@@ -99,6 +99,7 @@ namespace JRunner
         public static string cpukeypath = "cpukey.txt";
         public static string nanddump = "nanddump.bin";
         public static string updflash = "updflash.bin";
+        public static string exefolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string rootfolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string currentdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string outfolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "output");

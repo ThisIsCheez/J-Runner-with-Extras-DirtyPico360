@@ -134,7 +134,7 @@ namespace JRunner
             if (comports.Contains(variables.COMPort)) comm.PortName = variables.COMPort;
             else if (comports.Count >= 1) comm.PortName = comports[0];
             if (parity.Count >= 1) comm.Parity = parity[0];
-            if (stopbits.Count >= 2) comm.StopBits = stopbits[1];
+            if (stopbits.Count >= 2) comm.StopBits = stopbits[0];
             comm.DataBits = "8";
             comm.BaudRate = "115200";
         }

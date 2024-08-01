@@ -2609,7 +2609,7 @@ namespace JRunner
 
                     // Launch XeBuild
                     Thread.Sleep(1000);
-                    nand = new Nand.PrivateN();
+                    nand = new PrivateN();
                     nand._cpukey = txtCPUKey.Text;
                     string kvfile = Path.Combine(variables.rootfolder, @"xebuild\data\kv.bin");
                     if (File.Exists(kvfile))
@@ -2644,6 +2644,33 @@ namespace JRunner
 
             }
             ThreadStart starter = delegate { xPanel.createxebuild_v2(true, nand, false); };
+            new Thread(starter).Start();
+        }
+
+        public void createSafeImage()
+        {
+            if (string.IsNullOrWhiteSpace(variables.filename1))
+            {
+                MessageBox.Show("No nand loaded in source", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (variables.ctype.ID == -1)
+            {
+                MessageBox.Show("No console type is selected", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Console.WriteLine("======================");
+            Console.WriteLine("Starting Safe Nand Creation");
+            string kv;
+            if (variables.boardtype.Contains("Trinity") || variables.boardtype.Contains("Corona") || variables.boardtype.Contains("Winchester")) kv = "slim_nofcrt";
+            else if (variables.boardtype.Contains("Xenon")) kv = "phat_t1";
+            else kv = "phat_t2";
+            File.Copy(Path.Combine(variables.donorPath, kv + ".bin"), variables.xepath + "KV.bin", true);
+            Console.WriteLine("Copied KV.bin");
+
+            Thread.Sleep(1000);
+            ThreadStart starter = delegate { xPanel.createxebuild_v2(false, nand, false, true); };
             new Thread(starter).Start();
         }
 
@@ -2999,6 +3026,11 @@ namespace JRunner
                 cdonor.Show(this); // Keeps cdonor on top of MainForm
                 cdonor.Location = new Point(Location.X + 14, Location.Y + (Height - cdonor.Height) - 14);
             }
+        }
+
+        private void createSafeDualImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            createSafeImage();
         }
 
         private void decryptKeyvaultToolStripMenuItem_Click(object sender, EventArgs e)

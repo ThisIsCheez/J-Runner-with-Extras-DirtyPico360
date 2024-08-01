@@ -53,6 +53,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.chkRecalcEcc = new System.Windows.Forms.CheckBox();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBox();
+            this.labelUseSource = new System.Windows.Forms.Label();
+            this.labelUseExtra = new System.Windows.Forms.Label();
             this.Commandgrp.SuspendLayout();
             this.sizebox.SuspendLayout();
             this.optionalbox.SuspendLayout();
@@ -294,11 +296,39 @@
             this.chkAlwaysOnTop.UseVisualStyleBackColor = true;
             this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
             // 
+            // labelUseSource
+            // 
+            this.labelUseSource.AutoSize = true;
+            this.labelUseSource.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelUseSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUseSource.ForeColor = System.Drawing.Color.Blue;
+            this.labelUseSource.Location = new System.Drawing.Point(183, 12);
+            this.labelUseSource.Name = "labelUseSource";
+            this.labelUseSource.Size = new System.Drawing.Size(82, 13);
+            this.labelUseSource.TabIndex = 11;
+            this.labelUseSource.Text = "Use Source File";
+            this.labelUseSource.Click += new System.EventHandler(this.labelUseSource_Click);
+            // 
+            // labelUseExtra
+            // 
+            this.labelUseExtra.AutoSize = true;
+            this.labelUseExtra.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelUseExtra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUseExtra.ForeColor = System.Drawing.Color.Blue;
+            this.labelUseExtra.Location = new System.Drawing.Point(271, 12);
+            this.labelUseExtra.Name = "labelUseExtra";
+            this.labelUseExtra.Size = new System.Drawing.Size(72, 13);
+            this.labelUseExtra.TabIndex = 12;
+            this.labelUseExtra.Text = "Use Extra File";
+            this.labelUseExtra.Click += new System.EventHandler(this.labelUseExtra_Click);
+            // 
             // NandTimingFunctions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 146);
+            this.Controls.Add(this.labelUseExtra);
+            this.Controls.Add(this.labelUseSource);
             this.Controls.Add(this.chkAlwaysOnTop);
             this.Controls.Add(this.chkRecalcEcc);
             this.Controls.Add(this.optionalbox);
@@ -351,5 +381,7 @@
         private System.Windows.Forms.CheckBox chkOptional;
         private System.Windows.Forms.CheckBox chkRecalcEcc;
         private System.Windows.Forms.CheckBox chkAlwaysOnTop;
+        private System.Windows.Forms.Label labelUseSource;
+        private System.Windows.Forms.Label labelUseExtra;
     }
 }
