@@ -220,18 +220,7 @@ namespace JRunner
 
         private void txtConsoleID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Regex objAlphaPattern = new Regex("[A-F]$");
-            if (!char.IsControl(e.KeyChar)
-               && !char.IsDigit(e.KeyChar)
-                && !objAlphaPattern.IsMatch(e.KeyChar.ToString()))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtDVDkey_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Regex objAlphaPattern = new Regex("[0-9A-F]$");
+            Regex objAlphaPattern = new Regex("[A-Fa-f]$");
             if (!char.IsControl(e.KeyChar)
                && !char.IsDigit(e.KeyChar)
                 && !objAlphaPattern.IsMatch(e.KeyChar.ToString()))
