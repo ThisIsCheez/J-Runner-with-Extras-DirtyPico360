@@ -147,6 +147,7 @@ namespace JRunner
             this.nandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createDonorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createSafeDualImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.decryptKeyvaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             this.loadGlitch2XeLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -165,7 +166,6 @@ namespace JRunner
             this.jRPBLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateJRPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createSafeDualImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox8.SuspendLayout();
             this.getCpuKeyMenu.SuspendLayout();
             this.showWorkingFolderMenu.SuspendLayout();
@@ -1201,6 +1201,14 @@ namespace JRunner
             this.createDonorToolStripMenuItem.Text = "Create Donor…";
             this.createDonorToolStripMenuItem.Click += new System.EventHandler(this.createDonorToolStripMenuItem_Click);
             // 
+            // createSafeDualImageToolStripMenuItem
+            // 
+            this.createSafeDualImageToolStripMenuItem.Name = "createSafeDualImageToolStripMenuItem";
+            this.createSafeDualImageToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.createSafeDualImageToolStripMenuItem.Text = "Create Safe Dual Image";
+            this.createSafeDualImageToolStripMenuItem.Visible = false;
+            this.createSafeDualImageToolStripMenuItem.Click += new System.EventHandler(this.createSafeDualImageToolStripMenuItem_Click);
+            // 
             // decryptKeyvaultToolStripMenuItem
             // 
             this.decryptKeyvaultToolStripMenuItem.Name = "decryptKeyvaultToolStripMenuItem";
@@ -1337,13 +1345,6 @@ namespace JRunner
             this.keyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
             this.keyDatabaseToolStripMenuItem.Text = "Key Database";
             this.keyDatabaseToolStripMenuItem.Click += new System.EventHandler(this.keyDatabaseToolStripMenuItem_Click);
-            // 
-            // createSafeDualImageToolStripMenuItem
-            // 
-            this.createSafeDualImageToolStripMenuItem.Name = "createSafeDualImageToolStripMenuItem";
-            this.createSafeDualImageToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.createSafeDualImageToolStripMenuItem.Text = "Create Safe Dual Image";
-            this.createSafeDualImageToolStripMenuItem.Click += new System.EventHandler(this.createSafeDualImageToolStripMenuItem_Click);
             // 
             // MainForm
             // 

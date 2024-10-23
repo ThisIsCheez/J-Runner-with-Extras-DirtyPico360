@@ -2647,7 +2647,7 @@ namespace JRunner
             new Thread(starter).Start();
         }
 
-        public void createSafeImage()
+        public void createSafeImage() // This is incomplete
         {
             if (string.IsNullOrWhiteSpace(variables.filename1))
             {
