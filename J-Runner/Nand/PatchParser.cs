@@ -107,7 +107,7 @@ namespace JRunner.Nand
                             {
                                 foundAPatch = true;
                                 foundPatches.Add(patch);
-
+                                
                                 if (patch.consoleMsg != "")
                                 {
                                     if (patch.name != "XLHDD" && patch.name != "XLUSB")

@@ -59,7 +59,7 @@
             this.cboPort.FormattingEnabled = true;
             this.cboPort.Location = new System.Drawing.Point(42, 26);
             this.cboPort.Name = "cboPort";
-            this.cboPort.Size = new System.Drawing.Size(80, 21);
+            this.cboPort.Size = new System.Drawing.Size(70, 21);
             this.cboPort.TabIndex = 2;
             this.cboPort.SelectedIndexChanged += new System.EventHandler(this.cboPort_SelectedIndexChanged);
             // 
@@ -79,7 +79,7 @@
             "38400",
             "57600",
             "115000"});
-            this.cboBaud.Location = new System.Drawing.Point(245, 26);
+            this.cboBaud.Location = new System.Drawing.Point(235, 26);
             this.cboBaud.Name = "cboBaud";
             this.cboBaud.Size = new System.Drawing.Size(76, 21);
             this.cboBaud.TabIndex = 3;
@@ -96,7 +96,7 @@
             // BaudRate
             // 
             this.BaudRate.AutoSize = true;
-            this.BaudRate.Location = new System.Drawing.Point(183, 29);
+            this.BaudRate.Location = new System.Drawing.Point(173, 29);
             this.BaudRate.Name = "BaudRate";
             this.BaudRate.Size = new System.Drawing.Size(61, 13);
             this.BaudRate.TabIndex = 5;
@@ -105,7 +105,7 @@
             // DataBits
             // 
             this.DataBits.AutoSize = true;
-            this.DataBits.Location = new System.Drawing.Point(327, 29);
+            this.DataBits.Location = new System.Drawing.Point(317, 29);
             this.DataBits.Name = "DataBits";
             this.DataBits.Size = new System.Drawing.Size(53, 13);
             this.DataBits.TabIndex = 7;
@@ -123,7 +123,7 @@
             // StopBits
             // 
             this.StopBits.AutoSize = true;
-            this.StopBits.Location = new System.Drawing.Point(463, 29);
+            this.StopBits.Location = new System.Drawing.Point(423, 29);
             this.StopBits.Name = "StopBits";
             this.StopBits.Size = new System.Drawing.Size(52, 13);
             this.StopBits.TabIndex = 11;
@@ -166,17 +166,17 @@
             "7",
             "8",
             "9"});
-            this.cboData.Location = new System.Drawing.Point(381, 26);
+            this.cboData.Location = new System.Drawing.Point(371, 26);
             this.cboData.Name = "cboData";
-            this.cboData.Size = new System.Drawing.Size(76, 21);
+            this.cboData.Size = new System.Drawing.Size(46, 21);
             this.cboData.TabIndex = 15;
             // 
             // cboStop
             // 
             this.cboStop.FormattingEnabled = true;
-            this.cboStop.Location = new System.Drawing.Point(516, 26);
+            this.cboStop.Location = new System.Drawing.Point(476, 26);
             this.cboStop.Name = "cboStop";
-            this.cboStop.Size = new System.Drawing.Size(55, 21);
+            this.cboStop.Size = new System.Drawing.Size(95, 21);
             this.cboStop.TabIndex = 16;
             // 
             // textBox1
@@ -197,7 +197,7 @@
             // 
             // cmdRefresh
             // 
-            this.cmdRefresh.Location = new System.Drawing.Point(125, 25);
+            this.cmdRefresh.Location = new System.Drawing.Point(115, 25);
             this.cmdRefresh.Name = "cmdRefresh";
             this.cmdRefresh.Size = new System.Drawing.Size(52, 23);
             this.cmdRefresh.TabIndex = 19;

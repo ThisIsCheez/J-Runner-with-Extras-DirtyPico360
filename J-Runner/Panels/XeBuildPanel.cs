@@ -1278,7 +1278,7 @@ namespace JRunner.Panels
             xe.client(arguments);
         }
 
-        public void createxebuild_v2(bool custom, Nand.PrivateN nand, bool fullDataClean)
+        public void createxebuild_v2(bool custom, Nand.PrivateN nand, bool fullDataClean, bool silent = false)
         {
             Classes.xebuild xe = new Classes.xebuild();
             xe.loadvariables(nand._cpukey, (variables.hacktypes)variables.ttyp, variables.dashversion,
@@ -1317,21 +1317,26 @@ namespace JRunner.Panels
                     MessageBox.Show("You must select a .bin file", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                     return;
                 }
-                try
+
+                if (!silent)
                 {
-                    string[] files = { "kv.bin", "smc.bin", "smc_config.bin", "fcrt.bin" };
-                    foreach (string file in files)
+                    try
                     {
-                        if (File.Exists(Path.Combine(variables.rootfolder, @"xebuild\data\" + file)))
+                        string[] files = { "kv.bin", "smc.bin", "smc_config.bin", "fcrt.bin" };
+                        foreach (string file in files)
                         {
-                            if (MessageBox.Show(file + " found. Delete it?\nUnless you put it there, delete it!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                            if (File.Exists(Path.Combine(variables.rootfolder, @"xebuild\data\" + file)))
                             {
-                                File.Delete(Path.Combine(variables.rootfolder, @"xebuild\data\" + file));
+                                if (MessageBox.Show(file + " found. Delete it?\nUnless you put it there, delete it!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                                {
+                                    File.Delete(Path.Combine(variables.rootfolder, @"xebuild\data\" + file));
+                                }
                             }
                         }
                     }
+                    catch (Exception ex) { if (variables.debugMode) Console.WriteLine(ex.ToString()); }
                 }
-                catch (Exception ex) { if (variables.debugMode) Console.WriteLine(ex.ToString()); }
+
                 if (!nand.cpukeyverification(nand._cpukey))
                 {
                     Console.WriteLine("Wrong CPU Key");
@@ -1365,7 +1370,7 @@ namespace JRunner.Panels
                     long size = 0;
                     if (Nand.Nand.cpukeyverification(Oper.openfile(Path.Combine(variables.rootfolder, @"xebuild\data\kv.bin"), ref size, 0), variables.cpukey))
                     {
-                        if (variables.debugMode) Console.WriteLine("CPU Key is Correct");
+                        if (variables.debugMode) Console.WriteLine("CPU Key is correct");
                         if (Nand.Nand.getfcrtflag(File.ReadAllBytes(Path.Combine(variables.rootfolder, @"xebuild\data\kv.bin")), variables.cpukey))
                         {
                             if (!File.Exists(Path.Combine(variables.rootfolder, @"xebuild\data\fcrt.bin")))
@@ -1399,17 +1404,18 @@ namespace JRunner.Panels
             switch (xe.createxebuild(custom))
             {
                 case Classes.xebuild.XebuildError.nocpukey:
-                    MessageBox.Show("CPU Key is Missing");
+                    MessageBox.Show("CPU Key is missing");
                     return;
                 case Classes.xebuild.XebuildError.nodash:
-                    MessageBox.Show("No Kernel Selected");
+                    MessageBox.Show("No kernel selected");
                     return;
                 case Classes.xebuild.XebuildError.noinis:
-                    MessageBox.Show("Ini's are Missing");
+                    MessageBox.Show("Ini's are missing");
                     return;
                 case Classes.xebuild.XebuildError.nobootloaders:
                     Console.WriteLine("The specified console bootloader list ({0}) is missing from the ini ({1})", variables.ctype.Ini + "bl", ini);
                     Console.WriteLine("You can either add it manually or ask for it get added if its possible");
+                    xe.xeExit += xe_xeExit;
                     return;
                 case Classes.xebuild.XebuildError.wrongcpukey:
                     MessageBox.Show("Wrong CPU Key");
@@ -1441,21 +1447,25 @@ namespace JRunner.Panels
 
         public void xe_xeExit(object sender, EventArgs e)
         {
-            xeExitActual();
+            xeExitActual(variables.xefinished);
         }
 
-        public void xeExitActual()
+        public void xeExitActual(bool success = true)
         {
+            if (variables.debugMode) Console.WriteLine("XeBuild Success: " + success.ToString());
             variables.changeldv = 0;
             MainForm.mainForm.updateProgress(100);
 
-            try
+            if (success)
             {
-                File.Copy(Path.Combine(variables.rootfolder, @"xebuild\options.ini"), Path.Combine(variables.rootfolder, @"xebuild\data\options.ini"), true);
-                chkXeSettings.Checked = false;
-                File.Move(Path.Combine(variables.xefolder, variables.updflash + ".log"), Path.Combine(variables.xefolder, variables.updflash.Substring(0, variables.updflash.IndexOf(".")) + "(" + DateTime.Now.ToString("ddMMyyyyHHmm") + ").bin.log"));
+                try
+                {
+                    File.Copy(Path.Combine(variables.rootfolder, @"xebuild\options.ini"), Path.Combine(variables.rootfolder, @"xebuild\data\options.ini"), true);
+                    chkXeSettings.Checked = false;
+                    File.Move(Path.Combine(variables.xefolder, variables.updflash + ".log"), Path.Combine(variables.xefolder, variables.updflash.Substring(0, variables.updflash.IndexOf(".")) + "(" + DateTime.Now.ToString("ddMMyyyyHHmm") + ").bin.log"));
+                }
+                catch (Exception ex) { if (variables.debugMode) Console.WriteLine(ex.ToString()); }
             }
-            catch (Exception ex) { if (variables.debugMode) Console.WriteLine(ex.ToString()); }
 
             try
             {
@@ -1463,7 +1473,7 @@ namespace JRunner.Panels
             }
             catch { }
 
-            if (variables.xefinished)
+            if (variables.xefinished && success)
             {
                 Console.WriteLine("Saved to {0}", variables.xefolder);
                 Console.WriteLine("Image is Ready");

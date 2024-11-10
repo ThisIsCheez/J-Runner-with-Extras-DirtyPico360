@@ -199,6 +199,7 @@
             this.textBoxCbType.TabIndex = 69;
             this.textBoxCbType.TabStop = false;
             this.textBoxCbType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCbType.DoubleClick += new System.EventHandler(this.textBoxCbType_DoubleClick);
             // 
             // label3
             // 

@@ -1441,7 +1441,7 @@ namespace JRunner
                 }
             }
         }
-        void writexell()
+        void writeXellNandX()
         {
             if (string.IsNullOrWhiteSpace(variables.filename1)) loadfile(ref variables.filename1, ref this.txtFileSource, true);
             if (string.IsNullOrWhiteSpace(variables.filename1)) return;
@@ -1462,7 +1462,7 @@ namespace JRunner
                 if (variables.debugMode) Console.WriteLine("File Length = {0}", len);
 
                 NandX.Errors result = NandX.Errors.None;
-                result = nandx.write(variables.filename1, Nandsize.S16, 0, 0x50);
+                result = nandx.write(variables.filename1, Nandsize.S16, 0, 0x50, false, false);
 
                 if (result == NandX.Errors.None)
                 {
@@ -1947,7 +1947,7 @@ namespace JRunner
                 Console.WriteLine("Initializing {0}, please wait...", Path.GetFileName(variables.filename1));
                 if (listInfo.Contains(xsvfChoice)) xsvfChoice_CloseClick();
                 updateProgress(progressBar.Maximum / 2);
-                nand = new Nand.PrivateN(variables.filename1, variables.cpukey);
+                nand = new PrivateN(variables.filename1, variables.cpukey);
                 if (!nand.ok)
                 {
                     updateProgress(progressBar.Maximum);
@@ -2084,7 +2084,7 @@ namespace JRunner
                         patchesByte = Nand.Nand.unecc(patchesByte);
                     }
                     
-                    byte[] patches = new byte[0x1000];
+                    byte[] patches = new byte[0x4000];
                     
                     if (nand.bigblock)
                     {
@@ -2107,7 +2107,7 @@ namespace JRunner
                 
                     if (!patchResult)
                     {
-                        patches = new byte[0x1000];
+                        patches = new byte[0x4000];
                 
                         for (int i = 0; i < patches.Length; i++)
                         {
@@ -2627,7 +2627,7 @@ namespace JRunner
 
                     // Launch XeBuild
                     Thread.Sleep(1000);
-                    nand = new Nand.PrivateN();
+                    nand = new PrivateN();
                     nand._cpukey = txtCPUKey.Text;
                     string kvfile = Path.Combine(variables.rootfolder, @"xebuild\data\kv.bin");
                     if (File.Exists(kvfile))
@@ -2662,6 +2662,33 @@ namespace JRunner
 
             }
             ThreadStart starter = delegate { xPanel.createxebuild_v2(true, nand, false); };
+            new Thread(starter).Start();
+        }
+
+        public void createSafeImage() // This is incomplete
+        {
+            if (string.IsNullOrWhiteSpace(variables.filename1))
+            {
+                MessageBox.Show("No nand loaded in source", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (variables.ctype.ID == -1)
+            {
+                MessageBox.Show("No console type is selected", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Console.WriteLine("======================");
+            Console.WriteLine("Starting Safe Nand Creation");
+            string kv;
+            if (variables.boardtype.Contains("Trinity") || variables.boardtype.Contains("Corona") || variables.boardtype.Contains("Winchester")) kv = "slim_nofcrt";
+            else if (variables.boardtype.Contains("Xenon")) kv = "phat_t1";
+            else kv = "phat_t2";
+            File.Copy(Path.Combine(variables.donorPath, kv + ".bin"), variables.xepath + "KV.bin", true);
+            Console.WriteLine("Copied KV.bin");
+
+            Thread.Sleep(1000);
+            ThreadStart starter = delegate { xPanel.createxebuild_v2(false, nand, false, true); };
             new Thread(starter).Start();
         }
 
@@ -2745,6 +2772,11 @@ namespace JRunner
         #endregion
 
         #region UI
+
+        public void updateCpuKeyText(string key)
+        {
+            txtCPUKey.Text = key;
+        }
 
         public void updateProgress(int progress)
         {
@@ -3014,6 +3046,11 @@ namespace JRunner
             }
         }
 
+        private void createSafeDualImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            createSafeImage();
+        }
+
         private void decryptKeyvaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             KeyvaultDecrypter dk = new KeyvaultDecrypter();
@@ -3215,10 +3252,27 @@ namespace JRunner
             }
         }
 
+        CPUKeyGenGUI CKGG;
         private void generateCpuKeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((ModifierKeys & Keys.Shift) == Keys.Shift) txtCPUKey.Text = variables.superDevKey;
-            else txtCPUKey.Text = CpuKeyGen.GenerateKey();
+            if ((ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                txtCPUKey.Text = variables.superDevKey;
+            }
+            else
+            {
+                if (Application.OpenForms.OfType<CPUKeyGenGUI>().Any())
+                {
+                    CKGG.WindowState = FormWindowState.Normal;
+                    CKGG.Activate();
+                }
+                else
+                {
+                    CKGG = new CPUKeyGenGUI();
+                    CKGG.Show();
+                    CKGG.Location = new Point(Location.X + (Width - CKGG.Width) / 2, Location.Y + 158);
+                }
+            }
         }
 
         private void checkSecdataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3610,7 +3664,8 @@ namespace JRunner
 
             if (device == DEVICE.PICOFLASHER)
             {
-                picoflasher.Write(1, 0, 0, true);
+                if (Path.GetExtension(variables.filename1) == ".ecc") picoflasher.Write(1, 0, 0, true);
+                else picoflasher.Write(0, 0, 0, true);
             }
             else if (device == DEVICE.XFLASHER_SPI)
             {
@@ -3630,7 +3685,7 @@ namespace JRunner
                 }
                 else if (Path.GetExtension(variables.filename1) == ".bin")
                 {
-                    ThreadStart starter = delegate { writexell(); };
+                    ThreadStart starter = delegate { writeXellNandX(); };
                     new Thread(starter).Start();
                 }
                 else getconsoletype(3);

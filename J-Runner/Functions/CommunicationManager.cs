@@ -347,6 +347,7 @@ namespace CommPort
         {
             foreach (string str in Enum.GetNames(typeof(StopBits)))
             {
+                if (str == "None") continue;
                 ((ComboBox)obj).Items.Add(str);
             }
         }
@@ -355,6 +356,7 @@ namespace CommPort
         {
             foreach (string str in Enum.GetNames(typeof(StopBits)))
             {
+                if (str == "None") continue;
                 obj.Add(str);
             }
         }

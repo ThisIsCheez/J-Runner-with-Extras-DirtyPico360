@@ -14,8 +14,6 @@ namespace JRunner
             InitializeComponent();
             this.AcceptButton = btnRun;
             btnRun.DialogResult = System.Windows.Forms.DialogResult.OK;
-            txtFilename.Text = variables.filename1;
-            txtFilename.Select(txtFilename.Text.Length, 0);
             MainForm.mainForm.updateDevice += UpdateDevice;
             UpdateDevice();
         }
@@ -241,6 +239,18 @@ namespace JRunner
         private void chkAlwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             variables.nandTimingAlwaysOnTop = this.TopMost = chkAlwaysOnTop.Checked;
+        }
+
+        private void labelUseSource_Click(object sender, EventArgs e)
+        {
+            txtFilename.Text = variables.filename1;
+            txtFilename.Select(txtFilename.Text.Length, 0);
+        }
+
+        private void labelUseExtra_Click(object sender, EventArgs e)
+        {
+            txtFilename.Text = variables.filename2;
+            txtFilename.Select(txtFilename.Text.Length, 0);
         }
     }
 }

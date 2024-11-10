@@ -84,7 +84,7 @@ namespace JRunner.Nand
             new _nand(1903, "Xenon", 0, 7371, 2, variables.hacktypes.jtag, variables.ctypes[8]),
             new _nand(1920, "Xenon", 0, 7371, 4, variables.hacktypes.jtag, variables.ctypes[8]),
             new _nand(1921, "Xenon", 0, 7371, 5, variables.hacktypes.jtag, variables.ctypes[8]),
-            new _nand(8192, "Xenon", 0, 7371, 5, variables.hacktypes.jtag, variables.ctypes[8]),
+            new _nand(8192, "Xenon Elpis", 0, 7371, 5, variables.hacktypes.jtag, variables.ctypes[8]),
             new _nand(4540, "Zephyr", 0, 7371, 3, variables.hacktypes.jtag, variables.ctypes[3]),
             new _nand(4558, "Zephyr", 0, 7371, 4, variables.hacktypes.jtag, variables.ctypes[3]),
             new _nand(4570, "Zephyr", 0, 7371, 4, variables.hacktypes.jtag, variables.ctypes[3]),

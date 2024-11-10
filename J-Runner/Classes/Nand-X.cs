@@ -1380,7 +1380,7 @@ namespace JRunner
                 }
                 else
                 {
-                    Console.WriteLine("Xilinx Device Not Detect");
+                    Console.WriteLine("Xilinx Device Not Detected");
                     return Errors.DeviceNotFound;
                 }
                 if (sendErase(MyUsbDevice) == 0)

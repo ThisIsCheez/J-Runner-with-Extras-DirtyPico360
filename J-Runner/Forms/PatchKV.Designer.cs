@@ -106,6 +106,7 @@
             // 
             // txtConsoleID
             // 
+            this.txtConsoleID.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtConsoleID.Location = new System.Drawing.Point(76, 44);
             this.txtConsoleID.MaxLength = 10;
             this.txtConsoleID.Name = "txtConsoleID";
@@ -201,13 +202,13 @@
             // 
             // txtDVDkey
             // 
+            this.txtDVDkey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDVDkey.Location = new System.Drawing.Point(76, 123);
             this.txtDVDkey.MaxLength = 32;
             this.txtDVDkey.Name = "txtDVDkey";
             this.txtDVDkey.Size = new System.Drawing.Size(264, 20);
             this.txtDVDkey.TabIndex = 14;
             this.txtDVDkey.TextChanged += new System.EventHandler(this.txtDVDkey_TextChanged);
-            this.txtDVDkey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDVDkey_KeyPress);
             // 
             // label8
             // 

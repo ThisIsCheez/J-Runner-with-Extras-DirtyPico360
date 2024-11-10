@@ -33,7 +33,8 @@ namespace JRunner
             if (string.IsNullOrWhiteSpace(variables.filename1)) return;
             if (!File.Exists(variables.filename1)) return;
 
-            writeNand(16, variables.filename1, 1, 0, 80); // startblock + length (hex) for display purposes only, not required
+            if (Path.GetExtension(variables.filename1) == ".ecc") writeNand(16, variables.filename1, 1, 0, 80); // startblock + length (hex) for display purposes only, not required
+            else writeNand(16, variables.filename1, 2, 0, 80); // startblock + length (hex) for display purposes only, not required
         }
 
         public void writeNandAuto()
@@ -47,7 +48,7 @@ namespace JRunner
                 return;
             }
 
-            double len = new FileInfo(variables.filename1).Length;
+            long len = new FileInfo(variables.filename1).Length;
             if (len == 50331648)
             {
                 MessageBox.Show("Unable to write eMMC type image with an SPI tool\n\nPlease use an eMMC tool", "Can't", MessageBoxButtons.OK, MessageBoxIcon.Error);

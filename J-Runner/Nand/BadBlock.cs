@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace JRunner.Nand
 {
@@ -359,6 +358,9 @@ namespace JRunner.Nand
                 reservedoffset = 0x3E0;
             }
             image = Oper.openfile(filename, ref imgsize, blocksize * howmany);
+
+            bool noCheck = file.Length == 0x140000 | file.Length == 0x14A000; // Don't check XeLL images
+            if (noCheck) return image; // Don't check for bad blocks
 
             if (image[0x205] == 0xFF || image[0x415] == 0xFF || image[0x200] == 0xFF)
             { }

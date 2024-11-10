@@ -340,6 +340,11 @@ namespace JRunner.Panels
             MainForm.mainForm.copyToClipboard(textBoxpd_cb.Text);
         }
 
+        private void textBoxCbType_DoubleClick(object sender, EventArgs e)
+        {
+            MainForm.mainForm.copyToClipboard(textBoxCbType.Text);
+        }
+
         private void textBoxldv_1_DoubleClick(object sender, EventArgs e)
         {
             MainForm.mainForm.copyToClipboard(textBoxldv_1.Text);
