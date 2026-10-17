@@ -1,7 +1,6 @@
-# J-Runner with Extras + DirtyPico360
-The Ultimate RGH/JTAG App
+## THIS FORK IS NO LONGER NEEDED OR SUPPORTED! DIRTY PICO SUPPORT IS NOW IN THE OFFICIAL RELEASE OF JRUNNER!
 
-Download here: https://github.com/ThisIsCheez/J-Runner-with-Extras-DirtyPico360/releases
+## Download here: https://github.com/Octal450/J-Runner-with-Extras
 
 System Requirements:
 - x86 based Windows PC (i386 or amd64)
